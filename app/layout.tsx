@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import { TrackingScripts } from "@/components/TrackingScripts";
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
+  variable: "--font-manrope",
 });
 
 export const metadata: Metadata = {
@@ -31,9 +32,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={inter.className}>
+      <body className={manrope.variable}>
         <TrackingScripts />
-        {/* Meta Pixel noscript fallback */}
         {META_PIXEL_ID && (
           <noscript>
             {/* eslint-disable-next-line @next/next/no-img-element */}
