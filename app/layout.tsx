@@ -22,6 +22,8 @@ export const metadata: Metadata = {
   },
 };
 
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+
 export default function RootLayout({
   children,
 }: {
@@ -31,6 +33,19 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={inter.className}>
         <TrackingScripts />
+        {/* Meta Pixel noscript fallback */}
+        {META_PIXEL_ID && (
+          <noscript>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              height="1"
+              width="1"
+              style={{ display: "none" }}
+              src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+              alt=""
+            />
+          </noscript>
+        )}
         {children}
       </body>
     </html>
