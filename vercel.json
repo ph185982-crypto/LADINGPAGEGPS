@@ -5,6 +5,7 @@
   "framework": "nextjs",
   "env": {
     "NEXT_PUBLIC_META_PIXEL_ID": "998928515981741",
-    "META_CAPI_PIXEL_ID": "998928515981741"
+    "META_CAPI_PIXEL_ID": "998928515981741",
+    "NEXT_PUBLIC_BRAND": "Nexo Brasil"
   }
 }
