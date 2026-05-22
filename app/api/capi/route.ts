@@ -1,17 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
-const PIXEL_ID = process.env.META_CAPI_PIXEL_ID;
+const PIXEL_ID = process.env.META_CAPI_PIXEL_ID ?? "998928515981741";
 const ACCESS_TOKEN = process.env.META_CAPI_ACCESS_TOKEN;
-const CAPI_URL = `https://graph.facebook.com/v19.0/${PIXEL_ID}/events`;
 
 function hash(value: string): string {
   return crypto.createHash("sha256").update(value.trim().toLowerCase()).digest("hex");
 }
 
 export async function POST(req: NextRequest) {
-  if (!PIXEL_ID || !ACCESS_TOKEN) {
-    return NextResponse.json({ error: "CAPI not configured" }, { status: 500 });
+  if (!ACCESS_TOKEN) {
+    return NextResponse.json({ ok: false, error: "CAPI token not configured" }, { status: 500 });
   }
 
   const body = await req.json().catch(() => null);
@@ -32,10 +31,10 @@ export async function POST(req: NextRequest) {
     client_user_agent: userAgent,
   };
 
-  if (body.fbc)  userData.fbc  = body.fbc;
-  if (body.fbp)  userData.fbp  = body.fbp;
-  if (body.em)   userData.em   = hash(body.em);
-  if (body.ph)   userData.ph   = hash(body.ph);
+  if (body.fbc) userData.fbc = body.fbc;
+  if (body.fbp) userData.fbp = body.fbp;
+  if (body.em)  userData.em  = hash(body.em);
+  if (body.ph)  userData.ph  = hash(body.ph);
 
   const event: Record<string, unknown> = {
     event_name: body.event_name,
@@ -45,20 +44,23 @@ export async function POST(req: NextRequest) {
     user_data: userData,
   };
 
-  if (body.custom_data) {
-    event.custom_data = body.custom_data;
-  }
+  if (body.custom_data) event.custom_data = body.custom_data;
 
   const payload = {
     data: [event],
-    ...(process.env.NODE_ENV !== "production" && { test_event_code: body.test_event_code }),
+    ...(process.env.NODE_ENV !== "production" && body.test_event_code
+      ? { test_event_code: body.test_event_code }
+      : {}),
   };
 
-  const res = await fetch(`${CAPI_URL}?access_token=${ACCESS_TOKEN}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
+  const res = await fetch(
+    `https://graph.facebook.com/v19.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }
+  );
 
   const result = await res.json();
   return NextResponse.json(result, { status: res.status });
