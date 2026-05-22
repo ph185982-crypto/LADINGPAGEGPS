@@ -2,17 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
 const PIXEL_ID = process.env.META_CAPI_PIXEL_ID ?? "998928515981741";
-const ACCESS_TOKEN = process.env.META_CAPI_ACCESS_TOKEN;
+const ACCESS_TOKEN =
+  process.env.META_CAPI_ACCESS_TOKEN ??
+  "EAAbrIQFXM0oBRpBOxdZCeYSwXhdZBATJvqLMesb5ZBsTiaDobe0YZCOlZBFBdqJl4fgmlZC6Kv7LYkxOdDUx8sFC9kalcXqPtn9ncechX1sywY2rcZCks3DtXOKHBGsgzbGJPWugkuBr5F9Ltl9RYmcagANl02ZCqUe7KhhtZBn6gKWiH33em3fe48UzAQp6N9wZDZD";
 
 function hash(value: string): string {
   return crypto.createHash("sha256").update(value.trim().toLowerCase()).digest("hex");
 }
 
 export async function POST(req: NextRequest) {
-  if (!ACCESS_TOKEN) {
-    return NextResponse.json({ ok: false, error: "CAPI token not configured" }, { status: 500 });
-  }
-
   const body = await req.json().catch(() => null);
   if (!body?.event_name) {
     return NextResponse.json({ error: "event_name required" }, { status: 400 });
