@@ -14,12 +14,50 @@ const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
 const GADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
 
+function getCookie(name: string): string {
+  if (typeof document === "undefined") return "";
+  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  return match ? match[2] : "";
+}
+
+async function sendCapi(
+  eventName: string,
+  customData?: Record<string, unknown>
+) {
+  try {
+    await fetch("/api/capi", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        event_name: eventName,
+        event_source_url: window.location.href,
+        fbc: getCookie("_fbc"),
+        fbp: getCookie("_fbp"),
+        custom_data: customData,
+      }),
+    });
+  } catch {
+    // silently fail — browser pixel is the fallback
+  }
+}
+
 export function TrackingScripts() {
   return (
     <>
-      {/* ── Meta Pixel ── */}
+      {/* ── Meta Pixel + CAPI ── */}
       {PIXEL_ID && (
-        <Script id="fb-pixel" strategy="afterInteractive">
+        <Script id="fb-pixel" strategy="afterInteractive" onLoad={() => {
+          // Server-side mirror via CAPI
+          sendCapi("PageView");
+          sendCapi("ViewContent", {
+            content_name: "Rastreador GPS Veicular 2 em 1",
+            content_category: "GPS / Rastreadores",
+            content_ids: ["GPS-2EM1-1UN"],
+            content_type: "product",
+            value: 197.00,
+            currency: "BRL",
+          });
+        }}>
           {`
             !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -101,19 +139,23 @@ export function trackCheckoutClick(kit: "1" | "2" | "3") {
   if (typeof window === "undefined") return;
 
   const product = KIT_PRODUCT_MAP[kit];
+  const checkoutData = {
+    content_ids: [product.id],
+    content_name: product.name,
+    content_type: "product",
+    num_items: Number(kit),
+    value: product.price,
+    currency: "BRL",
+  };
 
-  // Meta Pixel
+  // Meta Pixel (browser)
   if (window.fbq) {
     window.fbq("trackCustom", `SelectKit${kit}`);
-    window.fbq("track", "InitiateCheckout", {
-      content_ids: [product.id],
-      content_name: product.name,
-      content_type: "product",
-      num_items: Number(kit),
-      value: product.price,
-      currency: "BRL",
-    });
+    window.fbq("track", "InitiateCheckout", checkoutData);
   }
+
+  // Meta CAPI (server-side mirror)
+  sendCapi("InitiateCheckout", checkoutData);
 
   // GA4
   if (window.gtag) {
