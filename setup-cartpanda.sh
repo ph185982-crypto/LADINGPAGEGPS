@@ -14,9 +14,16 @@
 set -euo pipefail
 
 # ---------- CONFIGURE AQUI ----------
+# Você pode passar o token via variável de ambiente ou deixar hardcoded abaixo:
+#   export CARTPANDA_API_TOKEN=dtezlOs7K3MNJ1rYbcn06xg5lXUbHEsmjtSfLgkFby4lsymoC2WEH4jfed6K
+#   export CARTPANDA_STORE_SLUG=SEU_SLUG_AQUI
 CP_TOKEN="${CARTPANDA_API_TOKEN:-PREENCHER_TOKEN_AQUI}"
-CP_STORE="${CARTPANDA_STORE_SLUG:-nexobr}"          # slug da sua loja
-DRY_RUN="${DRY_RUN:-true}"                           # true = só mostra, false = executa
+CP_STORE="${CARTPANDA_STORE_SLUG:-PREENCHER_SLUG_AQUI}"   # slug da loja (ex: nexobr, nexobrasil, etc.)
+DRY_RUN="${DRY_RUN:-true}"                                 # true = só mostra, false = executa
+
+# Dados de rastreamento (já configurados na landing)
+META_PIXEL_ID="628397072200898"
+META_CAPI_TOKEN="EAAcNazmVPQ8BQ7ZC1RsqPQtZABhjaH3FQi9OjXXk8gojv3gSjPy7dCXHJTMxJrOfPhwo34ENt4Yx25eYtsr4dStu6W3PgUJkha3ZCj7IcuL3vnkCAQfEyR19kN0EJaA88JzQtkmGJK9eTPLGnJdXeE2vRZCeMq6AOz4F2dQZCM1gE8RLZC9ZBY9tkYE2CNFpaWDYAZDZD"
 # ------------------------------------
 
 # Tenta variações de base URL comuns na Cartpanda
@@ -305,11 +312,21 @@ cat <<'MANUAL'
    Configurações → Pagamentos
    Ativar: Pix ✓ | Cartão ✓ | Parcelamento até 10x
 
-5. PIXELS
-   Configurações → Integrações → Pixels
-   Meta Pixel ID: [preencher]
-   GA4: [preencher]
-   Google Ads: [preencher]
+5. PIXELS — META (FACEBOOK)
+   Caminho no painel: Admin → Rastreamento e scripts → Pixels → Novo Pixel
+   Tipo: Padrão + API (recomendado para CAPI)
+
+   Campos a preencher:
+     Nome do pixel:          Pixel Facebook Nexo Brasil
+     Facebook Pixel ID:      628397072200898
+     Token de acesso (CAPI): EAAcNazmVPQ8BQ7ZC1RsqPQtZABhjaH3FQi9OjXXk8gojv3gSjPy7dCXHJTMxJrOfPhwo34ENt4Yx25eYtsr4dStu6W3PgUJkha3ZCj7IcuL3vnkCAQfEyR19kN0EJaA88JzQtkmGJK9eTPLGnJdXeE2vRZCeMq6AOz4F2dQZCM1gE8RLZC9ZBY9tkYE2CNFpaWDYAZDZD
+
+   Opções recomendadas:
+     ✓ Disparar compra para boleto bancário
+     ✓ Disparar compra na página de pagamento PIX
+     ✓ Incluir valor do frete no evento de compra
+
+   Após salvar: teste com Meta Pixel Helper ou Gerenciador de Eventos → Teste de Eventos
 
 6. DOMÍNIO DO CHECKOUT
    Configurações → Domínio personalizado
