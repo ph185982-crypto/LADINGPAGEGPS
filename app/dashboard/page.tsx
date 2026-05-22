@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState, useCallback, useRef } from "react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -105,25 +106,6 @@ function StatusBadge({ status }: { status: string }) {
   );
 }
 
-// SVG Sparkline
-function Sparkline({ data, color = "#10B981", height = 40 }: { data: number[]; color?: string; height?: number }) {
-  if (!data.length) return <div style={{ height }} />;
-  const max = Math.max(...data, 0.01);
-  const min = Math.min(...data);
-  const range = max - min || 1;
-  const w = 120;
-  const points = data.map((v, i) => {
-    const x = (i / (data.length - 1)) * w;
-    const y = height - ((v - min) / range) * (height - 4) - 2;
-    return `${x},${y}`;
-  }).join(" ");
-  return (
-    <svg width={w} height={height} viewBox={`0 0 ${w} ${height}`}>
-      <polyline fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" points={points} />
-    </svg>
-  );
-}
-
 // Metric card
 function Metric({ label, value, sub, color }: { label: string; value: string; sub?: string; color?: string }) {
   return (
@@ -199,7 +181,6 @@ export default function Dashboard() {
   // ─── Render ─────────────────────────────────────────────────────────────────
   const acc = data?.account;
   const dailySpendsData = data?.dailyData.map((d) => d.spend) ?? [];
-  const dailyCtrData = data?.dailyData.map((d) => d.ctr) ?? [];
 
   const PERIOD_LABELS: Record<DatePreset, string> = { today: "Hoje", last_7d: "7 dias", last_30d: "30 dias" };
 
@@ -464,7 +445,7 @@ export default function Dashboard() {
                     {/* Thumbnail / type */}
                     <div className="w-12 h-12 rounded-lg overflow-hidden bg-slate-100 shrink-0 flex items-center justify-center">
                       {ad.thumbnail ? (
-                        <img src={ad.thumbnail} alt="" className="w-full h-full object-cover" />
+                        <Image src={ad.thumbnail} alt="" width={48} height={48} className="w-full h-full object-cover" unoptimized />
                       ) : (
                         <span className="text-xl">{isVideo ? "🎬" : "🔗"}</span>
                       )}
