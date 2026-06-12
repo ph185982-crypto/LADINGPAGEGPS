@@ -8,18 +8,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap');
 
 :root {
-  --preto: #080808;
-  --preto2: #0F0F0F;
-  --preto3: #161616;
+  --preto: #0A0A0A;
+  --preto2: #141414;
+  --preto3: #1E1E1E;
   --dourado: #BF9B4D;
   --dourado2: #D4AF6A;
   --dourado3: #8C6E2E;
-  --branco: #F2EDE4;
-  --branco2: #D9D3C7;
-  --cinza: #6A6560;
-  --cinza2: #4A4540;
-  --borda: rgba(191,155,77,0.18);
-  --borda2: rgba(191,155,77,0.08);
+  --branco: #F5F0E8;
+  --branco2: #E0D9CD;
+  --cinza: #9A9490;
+  --cinza2: #706B65;
+  --borda: rgba(191,155,77,0.25);
+  --borda2: rgba(191,155,77,0.12);
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -67,11 +67,11 @@ nav{
 @keyframes kenburnshero{from{transform:scale(1.03);}to{transform:scale(1.08);}}
 .hero-velo{
   position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(8,8,8,1) 0%,rgba(8,8,8,0.65) 45%,rgba(8,8,8,0.25) 100%);
+  background:linear-gradient(to top,rgba(10,10,10,0.95) 0%,rgba(10,10,10,0.45) 45%,rgba(10,10,10,0.1) 100%);
 }
 .hero-velo2{
   position:absolute;inset:0;
-  background:linear-gradient(to right,rgba(8,8,8,0.7) 0%,transparent 60%);
+  background:linear-gradient(to right,rgba(10,10,10,0.5) 0%,transparent 60%);
 }
 .hero-conteudo{
   position:relative;z-index:2;
@@ -116,7 +116,7 @@ nav{
 }
 .hero-stat{
   padding:24px 32px;border-left:2px solid var(--dourado);
-  margin-bottom:2px;background:rgba(8,8,8,0.6);
+  margin-bottom:2px;background:rgba(10,10,10,0.5);
   backdrop-filter:blur(8px);
 }
 .hero-stat .v{
@@ -155,7 +155,7 @@ nav{
 }
 .sobre-foto-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(to right,transparent 60%,var(--preto) 100%);
+  background:linear-gradient(to right,transparent 65%,var(--preto) 100%);
 }
 .sobre-numero{
   position:absolute;bottom:60px;left:60px;
@@ -211,7 +211,7 @@ nav{
 .serv-item{
   display:grid;grid-template-columns:80px 1fr auto;
   align-items:center;gap:40px;
-  padding:36px 48px;background:var(--preto3);
+  padding:36px 48px;background:var(--preto3);border:1px solid var(--borda2);
   border-left:3px solid transparent;
   transition:all .3s;cursor:pointer;
 }
@@ -219,7 +219,7 @@ nav{
 .serv-num{
   font-family:'Playfair Display',serif;
   font-size:52px;font-weight:400;
-  color:rgba(191,155,77,0.2);line-height:1;
+  color:rgba(191,155,77,0.12);line-height:1;
 }
 .serv-info{}
 .serv-t{
@@ -257,10 +257,10 @@ nav{
 .port-card:hover .port-bg{transform:scale(1.06);}
 .port-ov{
   position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(8,8,8,.95) 0%,rgba(8,8,8,.3) 50%,transparent 100%);
-  opacity:.7;transition:opacity .3s;
+  background:linear-gradient(to top,rgba(10,10,10,.85) 0%,rgba(10,10,10,.2) 50%,transparent 100%);
+  opacity:.5;transition:opacity .3s;
 }
-.port-card:hover .port-ov{opacity:1;}
+.port-card:hover .port-ov{opacity:.85;}
 .port-info{
   position:absolute;bottom:0;left:0;right:0;
   padding:28px 28px;z-index:2;
@@ -286,7 +286,7 @@ nav{
   gap:2px;margin-top:60px;
 }
 .depo{
-  padding:48px 40px;background:var(--preto3);
+  padding:48px 40px;background:var(--preto3);border:1px solid var(--borda2);
   border-bottom:3px solid transparent;transition:border-color .3s;
   display:flex;flex-direction:column;
 }
@@ -294,7 +294,7 @@ nav{
 .depo-aspas{
   font-family:'Playfair Display',serif;
   font-size:72px;font-weight:700;color:var(--dourado);
-  opacity:.25;line-height:.6;margin-bottom:28px;
+  opacity:.15;line-height:.6;margin-bottom:28px;
 }
 .depo-stars{color:var(--dourado);font-size:13px;letter-spacing:3px;margin-bottom:20px;}
 .depo-txt{
@@ -323,7 +323,7 @@ nav{
 }
 .reforma-left{
   padding:100px 80px;
-  background:linear-gradient(135deg,rgba(191,155,77,.05) 0%,transparent 60%);
+  background:linear-gradient(135deg,rgba(191,155,77,.08) 0%,transparent 60%);
 }
 .reforma-badge{
   display:inline-flex;align-items:center;gap:10px;
@@ -374,7 +374,7 @@ nav{
   gap:2px;margin-top:64px;
 }
 .proc-item{
-  padding:48px 36px;background:var(--preto2);
+  padding:48px 36px;background:var(--preto2);border:1px solid var(--borda2);
   position:relative;overflow:hidden;
 }
 .proc-item::after{
