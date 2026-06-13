@@ -481,6 +481,12 @@ footer{
   .faixa-item{font-size:10px;}
   .sobre-texto{padding:40px 16px;}
   .sobre-titulo{font-size:28px;}
+  #jornada{padding:70px 16px 60px;}
+  .jornada-cards{grid-template-columns:1fr;}
+  .jornada-card{padding:36px 24px;}
+  #comunicacao{padding:60px 16px;}
+  .cv-grid{grid-template-columns:1fr;}
+  .cv-servicos{grid-template-columns:1fr;}
   #servicos,#portfolio,#depoimentos,#processo,#cta{padding:60px 16px;}
   .serv-grid{grid-template-columns:1fr;}
   .port-grid{grid-template-columns:1fr;}
@@ -493,6 +499,128 @@ footer{
   #reforma .reforma-right{padding:40px 16px;}
   footer{padding:20px 16px;}
 }
+/* JORNADA SELECTOR */
+#jornada{
+  padding:100px 72px 80px;
+  background:var(--preto2);
+  text-align:center;
+  border-bottom:1px solid var(--borda);
+}
+.jornada-titulo{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,4vw,48px);
+  font-weight:500;color:var(--branco);
+  margin-bottom:12px;line-height:1.25;
+}
+.jornada-sub{
+  font-size:13px;font-weight:300;letter-spacing:.15em;
+  color:var(--cinza);text-transform:uppercase;margin-bottom:60px;
+}
+.jornada-cards{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:24px;max-width:900px;margin:0 auto;
+}
+.jornada-card{
+  display:flex;flex-direction:column;align-items:center;
+  padding:52px 40px;
+  border:1px solid var(--borda);
+  background:var(--preto3);
+  text-decoration:none;
+  transition:all .35s;
+  position:relative;overflow:hidden;
+}
+.jornada-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(191,155,77,.07) 0%,transparent 70%);
+  opacity:0;transition:opacity .35s;
+}
+.jornada-card:hover::before{opacity:1;}
+.jornada-card:hover{border-color:var(--dourado);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4);}
+.jornada-icon{
+  width:72px;height:72px;
+  border:1px solid var(--borda);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  margin-bottom:28px;
+  color:var(--dourado);
+  transition:background .35s,border-color .35s;
+}
+.jornada-card:hover .jornada-icon{background:var(--dourado);border-color:var(--dourado);color:var(--preto);}
+.jornada-card:hover .jornada-icon svg{color:var(--preto);}
+.jornada-icon svg{width:32px;height:32px;}
+.jornada-card-titulo{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:500;
+  color:var(--branco);margin-bottom:12px;
+}
+.jornada-card-desc{
+  font-size:13px;font-weight:300;
+  color:var(--cinza);line-height:1.7;
+  margin-bottom:28px;text-align:center;
+}
+.jornada-card-link{
+  font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--dourado);display:flex;align-items:center;gap:8px;
+}
+.jornada-card-link svg{width:14px;height:14px;transition:transform .2s;}
+.jornada-card:hover .jornada-card-link svg{transform:translateX(4px);}
+
+/* COMUNICAÇÃO VISUAL */
+#comunicacao{
+  padding:120px 72px;background:var(--preto);overflow:hidden;width:100%;
+}
+.cv-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:24px;margin-top:72px;
+}
+.cv-card{
+  position:relative;overflow:hidden;
+  border:1px solid var(--borda2);
+  background:var(--preto3);
+  transition:border-color .3s,transform .3s;
+}
+.cv-card:hover{border-color:var(--dourado);transform:translateY(-4px);}
+.cv-img{
+  width:100%;height:220px;
+  object-fit:cover;display:block;
+  filter:brightness(.85);
+  transition:filter .4s,transform .4s;
+}
+.cv-card:hover .cv-img{filter:brightness(1);transform:scale(1.04);}
+.cv-info{padding:24px 28px;}
+.cv-tag{
+  font-size:9px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--dourado);margin-bottom:10px;display:block;
+}
+.cv-nome{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:500;color:var(--branco);margin-bottom:8px;
+}
+.cv-desc{font-size:12px;color:var(--cinza);line-height:1.7;}
+
+.cv-servicos{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:16px;margin-top:64px;
+}
+.cv-serv-item{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:28px 24px;
+  border:1px solid var(--borda2);background:var(--preto3);
+  transition:border-color .3s;
+}
+.cv-serv-item:hover{border-color:var(--dourado);}
+.cv-serv-icon{
+  width:44px;height:44px;flex-shrink:0;
+  border:1px solid var(--borda);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--dourado);
+}
+.cv-serv-icon svg{width:20px;height:20px;}
+.cv-serv-txt h4{
+  font-size:14px;font-weight:500;color:var(--branco);
+  margin-bottom:6px;letter-spacing:.03em;
+}
+.cv-serv-txt p{font-size:12px;color:var(--cinza);line-height:1.65;}
+
 @media(max-width:480px){
   .nav-logo-txt .n1{font-size:14px;}
   .hero-titulo{font-size:clamp(24px,9vw,36px);line-height:1.15;}
@@ -519,11 +647,11 @@ footer{
     </div>
   </div>
   <ul class="nav-menu">
-    <li><a href="#sobre">Sobre</a></li>
-    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#jornada">Início</a></li>
+    <li><a href="#servicos">Reforma</a></li>
+    <li><a href="#comunicacao">Comunicação Visual</a></li>
     <li><a href="#portfolio">Portfólio</a></li>
     <li><a href="#depoimentos">Clientes</a></li>
-    <li><a href="#reforma">Reforma Gov</a></li>
     <li><a href="#cta">Contato</a></li>
   </ul>
   <a href="https://wa.me/5562984808802" class="nav-btn">Orçamento Gratuito</a>
@@ -559,6 +687,47 @@ footer{
       <div class="v">10+</div>
       <div class="l">Anos no mercado</div>
     </div>
+  </div>
+</section>
+
+<!-- JORNADA SELECTOR -->
+<section id="jornada">
+  <div class="eyebrow" style="justify-content:center;display:flex;margin-bottom:20px;">O que você precisa?</div>
+  <h2 class="jornada-titulo">Transformamos espaços<br>e marcas em Goiânia</h2>
+  <p class="jornada-sub">Escolha sua jornada</p>
+  <div class="jornada-cards">
+
+    <a href="#servicos" class="jornada-card">
+      <div class="jornada-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
+          <path d="M9 21V12h6v9"/>
+        </svg>
+      </div>
+      <div class="jornada-card-titulo">Reforma Residencial</div>
+      <p class="jornada-card-desc">Construção, reforma e acabamento de alto padrão para sua casa ou apartamento. Do projeto à entrega com qualidade premium.</p>
+      <span class="jornada-card-link">
+        Ver serviços de reforma
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </span>
+    </a>
+
+    <a href="#comunicacao" class="jornada-card">
+      <div class="jornada-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="4" width="20" height="14" rx="1"/>
+          <path d="M8 20h8M12 18v2"/>
+          <path d="M7 9h10M7 12h6"/>
+        </svg>
+      </div>
+      <div class="jornada-card-titulo">Comunicação Visual</div>
+      <p class="jornada-card-desc">Letreiros 3D, fachadas em ACM, luminosos e identidade visual para o seu negócio se destacar e atrair mais clientes.</p>
+      <span class="jornada-card-link">
+        Ver comunicação visual
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </span>
+    </a>
+
   </div>
 </section>
 
@@ -797,6 +966,122 @@ footer{
       <div class="proc-t">Entrega & Garantia</div>
       <p class="proc-d">Vistoriamos juntos e entregamos com garantia formal assinada. Sua satisfação é nossa assinatura.</p>
     </div>
+  </div>
+</section>
+
+<!-- COMUNICAÇÃO VISUAL -->
+<section id="comunicacao">
+  <div class="sec-header">
+    <div class="eyebrow">Comunicação Visual</div>
+    <h2 class="sec-titulo">Sua marca em destaque,<br>do letreiro à fachada</h2>
+    <p class="sec-desc" style="max-width:560px;margin-top:16px;color:var(--cinza);font-size:15px;line-height:1.8;">Criamos identidades visuais que vendem. Letreiros 3D, fachadas em ACM, luminosos e muito mais — tudo instalado com perfeição para o seu negócio se destacar.</p>
+  </div>
+
+  <!-- Portfólio de fachadas -->
+  <div class="cv-grid">
+    <div class="cv-card">
+      <div style="width:100%;height:220px;background:linear-gradient(135deg,#1a1a1a,#2a2a2a);display:flex;align-items:center;justify-content:center;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(191,155,77,0.4)" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="1"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="cv-info">
+        <span class="cv-tag">Letreiro 3D · Alimentação</span>
+        <div class="cv-nome">Sushi Marechal</div>
+        <p class="cv-desc">Letreiro 3D com iluminação de LED embutida e fachada em ACM preto premium com detalhes em vermelho.</p>
+      </div>
+    </div>
+    <div class="cv-card">
+      <div style="width:100%;height:220px;background:linear-gradient(135deg,#1a1a1a,#2a2a2a);display:flex;align-items:center;justify-content:center;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(191,155,77,0.4)" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="1"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="cv-info">
+        <span class="cv-tag">Fachada Completa · Farmácia</span>
+        <div class="cv-nome">Drogarias Ultra Popular</div>
+        <p class="cv-desc">Fachada completa em ACM vermelho com letreiro luminoso e identidade visual aplicada em toda a frente da loja.</p>
+      </div>
+    </div>
+    <div class="cv-card">
+      <div style="width:100%;height:220px;background:linear-gradient(135deg,#1a1a1a,#2a2a2a);display:flex;align-items:center;justify-content:center;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(191,155,77,0.4)" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="1"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="cv-info">
+        <span class="cv-tag">Letreiro · Moda & Varejo</span>
+        <div class="cv-nome">Outback Modas</div>
+        <p class="cv-desc">Letreiro 3D em aço escovado com letras recortadas e iluminação lateral, aplicado em fachada de vidro espelhado.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Serviços de comunicação visual -->
+  <div style="margin-top:72px;">
+    <div class="eyebrow" style="margin-bottom:40px;">O que fazemos</div>
+    <div class="cv-servicos">
+      <div class="cv-serv-item">
+        <div class="cv-serv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h7"/><path d="M15 15l5 5M15 20l5-5"/></svg>
+        </div>
+        <div class="cv-serv-txt">
+          <h4>Letreiros 3D</h4>
+          <p>Letras caixa em acrílico, aço inox ou MDF, com ou sem iluminação LED. Acabamento premium para sua marca brilhar.</p>
+        </div>
+      </div>
+      <div class="cv-serv-item">
+        <div class="cv-serv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 9h20"/></svg>
+        </div>
+        <div class="cv-serv-txt">
+          <h4>Fachadas em ACM</h4>
+          <p>Revestimento de fachadas com ACM (alumínio composto) em diversas cores e acabamentos. Moderno, durável e resistente.</p>
+        </div>
+      </div>
+      <div class="cv-serv-item">
+        <div class="cv-serv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+        </div>
+        <div class="cv-serv-txt">
+          <h4>Luminosos & Totem</h4>
+          <p>Caixas de luz, totens iluminados e painéis LED para máxima visibilidade, dia e noite, em qualquer clima.</p>
+        </div>
+      </div>
+      <div class="cv-serv-item">
+        <div class="cv-serv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="cv-serv-txt">
+          <h4>Adesivação & Plotagem</h4>
+          <p>Envelopamento de veículos, vitrines, paredes e fachadas. Alta durabilidade com impressão digital de precisão.</p>
+        </div>
+      </div>
+      <div class="cv-serv-item">
+        <div class="cv-serv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+        </div>
+        <div class="cv-serv-txt">
+          <h4>Identidade de Fachada</h4>
+          <p>Projeto completo de comunicação visual externa: da concepção à instalação, tudo alinhado com a identidade da sua marca.</p>
+        </div>
+      </div>
+      <div class="cv-serv-item">
+        <div class="cv-serv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="cv-serv-txt">
+          <h4>Instalação & Manutenção</h4>
+          <p>Equipe especializada para instalação segura e manutenção preventiva de todos os tipos de comunicação visual.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA comunicação visual -->
+  <div style="text-align:center;margin-top:72px;padding:60px 40px;border:1px solid var(--borda);background:var(--preto3);position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(191,155,77,.06) 0%,transparent 60%);pointer-events:none;"></div>
+    <div class="eyebrow" style="justify-content:center;display:flex;margin-bottom:16px;">Orçamento Gratuito</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,36px);font-weight:500;color:var(--branco);margin-bottom:16px;">Solicite um orçamento<br>para sua fachada</h3>
+    <p style="font-size:14px;color:var(--cinza);margin-bottom:36px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.7;">Envie uma foto do local e receba em até 24h uma proposta personalizada, sem compromisso.</p>
+    <a href="https://wa.me/5562984808802?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20comunicação%20visual%20(letreiro%2Ffachada)." class="btn-wa" style="display:inline-flex;">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 11.999c0 1.988.583 3.842 1.59 5.4L2 22l4.73-1.57A10 10 0 1011.999 2z"/></svg>
+      Pedir orçamento via WhatsApp
+    </a>
   </div>
 </section>
 
